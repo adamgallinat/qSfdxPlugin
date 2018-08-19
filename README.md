@@ -31,6 +31,7 @@ USAGE
 <!-- usagestop -->
 <!-- commands -->
 * [`sfdx_plugins hello:org [FILE]`](#sfdx-plugins-helloorg-file)
+* [`sfdx_plugins q:data:import`](#sfdx-plugins-qdataimport)
 
 ## `sfdx_plugins hello:org [FILE]`
 
@@ -59,6 +60,30 @@ EXAMPLES
 ```
 
 _See code: [src/commands/hello/org.ts](https://github.com/adamgallinat/sfdx_plugins/blob/v0.0.0/src/commands/hello/org.ts)_
+
+## `sfdx_plugins q:data:import`
+
+Prints a greeting and your org id(s)!
+
+```
+USAGE
+  $ sfdx_plugins q:data:import
+
+OPTIONS
+  -f, --file=file                                  tree export file
+  -p, --plan=plan                                  tree export plan
+  -u, --targetusername=targetusername              username or alias for the target org; overrides default target org
+  -v, --targetdevhubusername=targetdevhubusername  username or alias for the dev hub org; overrides default dev hub org
+  --apiversion=apiversion                          override the api version used for api requests made by this command
+  --json                                           format output as json
+  --loglevel=(trace|debug|info|warn|error|fatal)   logging level for this command invocation
+
+EXAMPLES
+  $ sfdx q:data:import --targetusername SCRATCH_ORG --plan data/sample-plan.js
+  $ sfdx q:data:import --targetusername SCRATCH_ORG --file data/sample-file.js
+```
+
+_See code: [src/commands/q/data/import.ts](https://github.com/adamgallinat/sfdx_plugins/blob/v0.0.0/src/commands/q/data/import.ts)_
 <!-- commandsstop -->
 <!-- debugging-your-plugin -->
 # Debugging your plugin
