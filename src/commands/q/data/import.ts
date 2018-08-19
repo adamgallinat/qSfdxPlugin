@@ -67,8 +67,6 @@ export default class Org extends SfdxCommand {
       }
       sobjRecordTypeMap.get(recordtype.SobjectType).set(recordtype.DeveloperName, recordtype.Id);
     }
-    console.log(sobjRecordTypeMap);
-
     const file = this.flags.file;
     const plan = this.flags.plan;
     if (!file && !plan) {
@@ -77,7 +75,6 @@ export default class Org extends SfdxCommand {
     if (file) {
       const fileData = JSON.parse(readFileSync(file, 'utf8')).records;
       const revisedFileData = this.reviseRecordData(fileData, sobjRecordTypeMap);
-      console.log(revisedFileData);
     }
 
     return {};

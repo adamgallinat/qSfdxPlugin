@@ -63,7 +63,7 @@ _See code: [src/commands/hello/org.ts](https://github.com/adamgallinat/sfdx_plug
 
 ## `sfdx_plugins q:data:import`
 
-Prints a greeting and your org id(s)!
+Imports data with RecordTypes when DeveloperName is specified as 'RecordType' key in tree export file
 
 ```
 USAGE
