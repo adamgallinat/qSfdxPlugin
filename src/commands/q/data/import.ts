@@ -1,7 +1,7 @@
 import {core, flags, SfdxCommand} from '@salesforce/command';
 import {exec} from 'shelljs';
 import {debug} from 'debug';
-import {readFile, readFileSync} from 'fs';
+import {readFileSync, writeFileSync, unlinkSync} from 'fs';
 
 // Initialize Messages with the current plugin directory
 core.Messages.importMessagesDirectory(__dirname);
@@ -67,17 +67,21 @@ export default class Org extends SfdxCommand {
       }
       sobjRecordTypeMap.get(recordtype.SobjectType).set(recordtype.DeveloperName, recordtype.Id);
     }
-    const file = this.flags.file;
-    const plan = this.flags.plan;
+    const file: string = this.flags.file;
+    const plan: string = this.flags.plan;
     if (!file && !plan) {
       throw new core.SfdxError('File or plan required');
     }
     if (file) {
       const fileData = JSON.parse(readFileSync(file, 'utf8')).records;
       const revisedFileData = this.reviseRecordData(fileData, sobjRecordTypeMap);
+      const filePath = file.slice(0, file.lastIndexOf('/')+1);
+      const fileName = file.slice(file.lastIndexOf('/')+1);
+      writeFileSync(fileName, JSON.stringify({"records": revisedFileData}));
+      exec(`sfdx force:data:tree:import -f ${fileName}`);
+      unlinkSync(fileName);
     }
-
-    return {};
+    return {};  
   }
 
   private reviseRecordData(fileData : Record[], recordTypeMap: Map<string,Map<string,string>>): Record[] {

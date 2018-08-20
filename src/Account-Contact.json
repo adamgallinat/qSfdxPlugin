@@ -25,7 +25,8 @@
                             "type": "Contact",
                             "referenceId": "ContactRef1"
                         },
-                        "FirstName": "test"
+                        "FirstName": "test",
+                        "LastName": "test2"
                     }
                 ]
             }
